@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  isAdmin   Boolean  @default(false)
+  isBlocked Boolean  @default(false)
+  isGuest   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  files     File[]
+  folders   Folder[]
+}
+
+model Folder {
+  id        Int      @id @default(autoincrement())
+  name      String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  parentId  Int?     // For nested folders (optional)
+  parent    Folder?  @relation("FolderHierarchy", fields: [parentId], references: [id])
+  children  Folder[] @relation("FolderHierarchy")
+  files     File[]
+  createdAt DateTime @default(now())
+}
+
+model File {
+  id           Int      @id @default(autoincrement())
+  filename     String
+  originalName String
+  path         String // Store path to file on disk
+  size         Int
+  mimeType     String
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
+  folderId     Int?
+  folder       Folder?  @relation(fields: [folderId], references: [id])
+  createdAt    DateTime @default(now())
+  shareLinks   ShareLink[]
+}
+
+model ShareLink {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  fileId    Int
+  file      File     @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  expiresAt DateTime?
+  views     Int      @default(0)
+}
