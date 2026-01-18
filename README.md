@@ -1,6 +1,6 @@
-# FileVault - Secure File Storage Server
+# DocSpace - Secure File Storage Server
 
-FileVault is a feature-rich, self-hosted file storage solution featuring a modern React frontend and a powerful Node.js/Express backend. It supports secure file uploads, folder management, file previews, and public sharing.
+DocSpace is a feature-rich, self-hosted file storage solution featuring a modern React frontend and a powerful Node.js/Express backend. It supports secure file uploads, folder management, file previews, and public sharing.
 
 ## 🚀 Features
 

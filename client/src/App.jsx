@@ -6,7 +6,7 @@ import './styles.css'
 
 
 // Configure Axios
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || ''; // Relative path for Vercel
 axios.defaults.withCredentials = true;
 
 // Auth Context
