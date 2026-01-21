@@ -10,9 +10,9 @@ const Navbar = ({ onSearch }) => {
     return (
         <nav className="navbar">
             <div className="nav-brand">
-                <Link to="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
-                    <div style={{ width: '24px', height: '24px', backgroundColor: 'var(--accent)', borderRadius: '4px' }}></div>
-                    <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>FileVault</span>
+                <Link to="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
+                    <img src="/logo.png" alt="DocSpace Logo" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                    <span style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--text-primary)', letterSpacing: '-0.5px' }}>DocSpace</span>
                 </Link>
                 <div className="breadcrumbs" style={{ marginLeft: '2rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                     Home {location.pathname !== '/dashboard' ? ` / ${location.pathname.slice(1)}` : ''}
