@@ -23,8 +23,20 @@
             "destination": "/server/index.js"
         },
         {
+            "source": "/assets/(.*)",
+            "destination": "/client/assets/$1"
+        },
+        {
+            "source": "/logo.png",
+            "destination": "/client/logo.png"
+        },
+        {
+            "source": "/vite.svg",
+            "destination": "/client/vite.svg"
+        },
+        {
             "source": "/(.*)",
-            "destination": "/index.html"
+            "destination": "/client/index.html"
         }
     ]
 }
