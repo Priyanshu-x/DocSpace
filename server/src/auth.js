@@ -88,25 +88,30 @@ authRouter.post('/login', async (req, res) => {
     }
 });
 
-// Guest Login (Auto-create)
+// Guest Login (Shared Account)
 authRouter.post('/guest', async (req, res) => {
     try {
-        const timestamp = Date.now();
-        const randomSuffix = Math.floor(Math.random() * 10000);
-        const email = `guest_${timestamp}_${randomSuffix}@temp.filevault`;
-        const password = `guest_${timestamp}_${randomSuffix}`; // Secure enough for temp
+        const SHARED_GUEST_EMAIL = 'creator@docspace.com';
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const user = await prisma.user.create({
-            data: {
-                email,
-                password: hashedPassword,
-                isGuest: true
-            }
+        // Try to find the existing shared guest
+        let user = await prisma.user.findUnique({
+            where: { email: SHARED_GUEST_EMAIL }
         });
 
-        // Generate Token
+        // If not found, create it (First time only)
+        if (!user) {
+            const hashedPassword = await bcrypt.hash('shared_guest_password', 10);
+            user = await prisma.user.create({
+                data: {
+                    email: SHARED_GUEST_EMAIL,
+                    password: hashedPassword,
+                    isGuest: true
+                }
+            });
+            console.log('Created shared guest account:', user.id);
+        }
+
+        // Generate Token for this shared user
         const token = jwt.sign(
             { id: user.id },
             JWT_SECRET,
