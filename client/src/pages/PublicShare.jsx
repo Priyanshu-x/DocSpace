@@ -12,7 +12,7 @@ const PublicShare = () => {
     useEffect(() => {
         const fetchShareConfig = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/share/${token}`);
+                const res = await axios.get(`/api/share/${token}`);
                 setFile(res.data);
             } catch (err) {
                 if (err.response?.status === 410) {

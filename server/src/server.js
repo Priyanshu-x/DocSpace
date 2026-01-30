@@ -38,7 +38,7 @@ app.use(cookieParser());
 
 // Routes
 app.use('/auth', authRouter);
-app.use('/share', shareRouter); // Public sharing routes
+app.use('/api/share', shareRouter); // Public sharing routes
 app.use('/api', verifyToken, fileRouter);
 
 // Serve uploads (Protected by verifyToken middleware in a real app, 
