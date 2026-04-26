@@ -54,7 +54,7 @@ DocSpace is a feature-rich, self-hosted file storage solution featuring a modern
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Priyanshu-x/DocSpace.git
 cd server
 ```
 
